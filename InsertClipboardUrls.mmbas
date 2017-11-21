@@ -1,0 +1,21 @@
+'#Language "WWB-COM"
+
+Option Explicit
+
+Sub Main
+	Dim t As Topic
+	Dim Sel As Topic
+	Set Sel = ActiveDocument.Selection.PrimaryTopic
+	Dim Line As String
+
+	For Each Line In Split(Clipboard, vbLf)
+	    ' Debug.Print Line
+		Line = Trim(Line)
+		If Line <> "" Then
+		    Set t = Sel.AddSubTopic(Line)
+			t.Hyperlinks.AddHyperlink(Line)
+		End If
+	Next Line
+
+	Sel.SelectOnly()
+End Sub
